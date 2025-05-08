@@ -38,17 +38,41 @@
     <p>Your resource for A&P students</p>
   </header>
 
-  <nav>
-    <a href="#">AVIM Library</a>
-<a href="practice-test.html">Practice Tests</a>
-    <a href="#">Schematics</a>
-<a href="videos.html">Videos</a>
-    <a href="#">Submit Photos</a>
-  </nav>
+<nav>
+  <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px;">
+    <a href="pdf-library.html">AVIM Library</a>
+    <a href="practice-test.html">Practice Tests</a>
+    <a href="schematics.html">Schematics</a>
+    <a href="videos.html">Videos</a>
+    <input type="text" id="searchInput" placeholder="Search..." onkeyup="searchSite()" style="padding: 6px; border-radius: 4px; border: none;">
+  </div>
+</nav>
 
   <main>
     <h2>Welcome</h2>
     <p>This site is built to support Aviation Maintenance students with FAA resources, study materials, diagrams, and more.</p>
   </main>
+  <script>
+  function searchSite() {
+    const input = document.getElementById('searchInput').value.toLowerCase();
+    const pages = {
+      "pdf": "avim-library.html",
+      "library": "pdf-library.html",
+      "test": "practice-test.html",
+      "asa": "practice-test.html",
+      "schematics": "schematics.html",
+      "diagram": "schematics.html",
+      "video": "videos.html",
+      "youtube": "videos.html"
+    };
+
+    for (const keyword in pages) {
+      if (input.includes(keyword)) {
+        window.location.href = pages[keyword];
+        break;
+      }
+    }
+  }
+</script>
 </body>
 </html>
