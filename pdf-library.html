@@ -43,19 +43,47 @@
   <header>
     <h1>AVIM Library</h1>
   </header>
+  <nav style="background-color: #0059b3; padding: 10px; text-align: center;">
+  <a href="index.html" style="color: white; margin: 0 15px; text-decoration: none;">Home</a>
+  <a href="pdf-library.html" style="color: white; margin: 0 15px; text-decoration: none;">AVIM Library</a>
+  <a href="practice-test.html" style="color: white; margin: 0 15px; text-decoration: none;">Practice Tests</a>
+  <a href="schematics.html" style="color: white; margin: 0 15px; text-decoration: none;">Schematics</a>
+  <a href="videos.html" style="color: white; margin: 0 15px; text-decoration: none;">Videos</a>
+</nav>
+<div style="text-align: center; padding: 20px;">
+  <input type="text" id="pdfSearch" placeholder="Search PDFs..." oninput="filterPDFs()" style="padding: 10px; width: 80%; max-width: 400px; border-radius: 4px; border: 1px solid #ccc;">
+</div>
+<div id="pdf-list" class="pdf-list"></div>
 
-  <div class="pdf-list">
-    <div class="pdf-item">
-      <p>FAA 8083-31 Airframe Handbook</p>
-      <a href="https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aircraft/airframe_handbook.pdf" target="_blank">Download PDF</a>
-      <iframe src="https://docs.google.com/gview?url=https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aircraft/airframe_handbook.pdf&embedded=true"></iframe>
-    </div>
+<script>
+const pdfFiles = [
+  { name: "FAA Airframe Handbook", url: "https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aircraft/airframe_handbook.pdf" },
+  { name: "FAA Powerplant Handbook", url: "https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aircraft/powerplant_handbook.pdf" },
+  { name: "Weight and Balance Handbook", url: "https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aviation/weight_balance_handbook.pdf" }
+];
 
-    <div class="pdf-item">
-      <p>FAA 8083-32 Powerplant Handbook</p>
-      <a href="https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aircraft/powerplant_handbook.pdf" target="_blank">Download PDF</a>
-      <iframe src="https://docs.google.com/gview?url=https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aircraft/powerplant_handbook.pdf&embedded=true"></iframe>
-    </div>
-  </div>
+  const listContainer = document.getElementById("pdf-list");
+
+  pdfFiles.forEach(file => {
+    const div = document.createElement("div");
+    div.className = "pdf-item";
+    div.innerHTML = `
+      <p>${file.name}</p>
+      <a href="${file.url}" target="_blank">Download PDF</a>
+      <iframe src="https://docs.google.com/gview?url=${file.url}&embedded=true"></iframe>
+    `;
+    listContainer.appendChild(div);
+  });
+
+  function filterPDFs() {
+    const input = document.getElementById('pdfSearch').value.toLowerCase();
+    const items = document.querySelectorAll('.pdf-item');
+
+    items.forEach(item => {
+      const text = item.textContent.toLowerCase();
+      item.style.display = text.includes(input) ? 'block' : 'none';
+    });
+  }
+</script>
 </body>
 </html>
