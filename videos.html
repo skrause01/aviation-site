@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Video Library</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #003366;
+    }
+    .video-grid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .video-wrapper {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      position: relative;
+    }
+    .video-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    p {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Aviation Training Videos</h1>
+  <div class="video-grid">
+    <div class="video-wrapper">
+      <iframe src="https://www.youtube.com/embed/Y5FGuK9vhmA" title="Magneto Explained" allowfullscreen></iframe>
+    </div>
+    <p>Understanding Aircraft Magnetos</p>
+
+    <div class="video-wrapper">
+      <iframe src="https://www.youtube.com/embed/nRReb9yYT_Y" title="Jet Engine Operation" allowfullscreen></iframe>
+    </div>
+    <p>How Jet Engines Work</p>
+  </div>
+</body>
+</html>

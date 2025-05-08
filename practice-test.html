@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FAA Practice Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #003366;
+    }
+    .question-box {
+      background: white;
+      padding: 20px;
+      margin: 0 auto;
+      max-width: 600px;
+      border: 1px solid #ccc;
+    }
+    .options label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    .feedback {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>FAA Practice Test</h1>
+  <div class="question-box">
+    <p><strong>Question 1:</strong> What is the primary purpose of a magneto in an aircraft engine?</p>
+    <div class="options">
+      <label><input type="radio" name="q1" onclick="checkAnswer(this, 'incorrect')"> To power the aircraft's lights</label>
+      <label><input type="radio" name="q1" onclick="checkAnswer(this, 'incorrect')"> To provide cabin heat</label>
+      <label><input type="radio" name="q1" onclick="checkAnswer(this, 'correct')"> To generate ignition spark independently of the battery</label>
+      <label><input type="radio" name="q1" onclick="checkAnswer(this, 'incorrect')"> To reduce exhaust emissions</label>
+    </div>
+    <div class="feedback" id="feedback1"></div>
+  </div>
+
+  <script>
+    function checkAnswer(input, result) {
+      const feedback = document.getElementById('feedback1');
+      if (result === 'correct') {
+        feedback.textContent = 'Correct!';
+        feedback.style.color = 'green';
+      } else {
+        feedback.textContent = 'Incorrect. Try again.';
+        feedback.style.color = 'red';
+      }
+    }
+  </script>
+</body>
+</html>

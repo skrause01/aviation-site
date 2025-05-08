@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PDF Library</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #003366;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .pdf-list {
+      padding: 20px;
+    }
+    .pdf-item {
+      background: white;
+      margin-bottom: 15px;
+      padding: 15px;
+      border: 1px solid #ccc;
+    }
+    .pdf-item a {
+      color: #0059b3;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    iframe {
+      width: 100%;
+      height: 500px;
+      border: none;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>AVIM Library</h1>
+  </header>
+
+  <div class="pdf-list">
+    <div class="pdf-item">
+      <p>FAA 8083-31 Airframe Handbook</p>
+      <a href="https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aircraft/airframe_handbook.pdf" target="_blank">Download PDF</a>
+      <iframe src="https://docs.google.com/gview?url=https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aircraft/airframe_handbook.pdf&embedded=true"></iframe>
+    </div>
+
+    <div class="pdf-item">
+      <p>FAA 8083-32 Powerplant Handbook</p>
+      <a href="https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aircraft/powerplant_handbook.pdf" target="_blank">Download PDF</a>
+      <iframe src="https://docs.google.com/gview?url=https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aircraft/powerplant_handbook.pdf&embedded=true"></iframe>
+    </div>
+  </div>
+</body>
+</html>
