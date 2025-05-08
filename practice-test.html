@@ -33,18 +33,18 @@
     }
     .button-group {
       text-align: center;
-      margin-bottom: 20px;
+      margin: 10px 0;
     }
     .button-group button {
-      margin: 0 10px;
-      padding: 10px 20px;
+      margin: 5px 10px;
+      padding: 8px 16px;
       font-weight: bold;
       cursor: pointer;
     }
     .question-box {
       background: white;
       padding: 20px;
-      margin: 0 auto;
+      margin: 20px auto;
       max-width: 600px;
       border: 1px solid #ccc;
     }
@@ -74,47 +74,83 @@
 
   <h1>FAA Practice Test</h1>
 
-  <div class="button-group">
-    <button onclick="loadSubject('airframe')">Airframe</button>
-    <button onclick="loadSubject('powerplant')">Powerplant</button>
-    <button onclick="loadSubject('general')">General</button>
+  <!-- Subject Buttons -->
+  <div class="button-group" id="subject-buttons">
+    <button onclick="selectSubject('airframe')">Airframe</button>
+    <button onclick="selectSubject('powerplant')">Powerplant</button>
+    <button onclick="selectSubject('general')">General</button>
   </div>
 
+  <!-- Subcategory Buttons -->
+  <div class="button-group" id="subcategory-buttons"></div>
+
+  <!-- Question Area -->
   <div id="question-container"></div>
 
   <script>
     const questions = {
-      airframe: [
-        {
-          question: "What is the primary function of an aircraft's wing?",
-          options: ["To house the landing gear", "To provide lift", "To store cargo", "To protect engines"],
-          correct: 1
-        }
-      ],
-      powerplant: [
-        {
-          question: "What is the primary purpose of a magneto in an aircraft engine?",
-          options: [
-            "To power the aircraft's lights",
-            "To provide cabin heat",
-            "To generate ignition spark independently of the battery",
-            "To reduce exhaust emissions"
-          ],
-          correct: 2
-        }
-      ],
-      general: [
-        {
-          question: "What is the standard atmospheric pressure at sea level?",
-          options: ["14.7 psi", "12.0 psi", "29.92 psi", "9.6 psi"],
-          correct: 0
-        }
-      ]
+      airframe: {
+        structures: [
+          {
+            question: "What is the primary function of aircraft stringers?",
+            options: ["Carry fuel", "Provide lift", "Reinforce the skin", "Control rudder trim"],
+            correct: 2
+          }
+        ],
+        hydraulics: [
+          {
+            question: "Hydraulic fluid is primarily used for:",
+            options: ["Cooling", "Lubrication", "Transmitting force", "Fire suppression"],
+            correct: 2
+          }
+        ]
+      },
+      powerplant: {
+        ignition: [
+          {
+            question: "What component generates spark in a reciprocating engine?",
+            options: ["Starter", "Magneto", "Igniter plug", "Solenoid"],
+            correct: 1
+          }
+        ],
+        turbines: [
+          {
+            question: "The hot section of a turbine engine includes:",
+            options: ["Compressor", "Combustor and turbine", "Fan", "Intake"],
+            correct: 1
+          }
+        ]
+      },
+      general: {
+        electricity: [
+          {
+            question: "Ohm's Law is represented by which formula?",
+            options: ["V = IR", "P = IV", "R = P/V", "I = V + R"],
+            correct: 0
+          }
+        ],
+        regulations: [
+          {
+            question: "FAR Part 43 covers:",
+            options: ["Aircraft registration", "Maintenance rules", "Flight training", "Medical certificates"],
+            correct: 1
+          }
+        ]
+      }
     };
 
-    function loadSubject(subject) {
+    function selectSubject(subject) {
+      const subcats = Object.keys(questions[subject]);
+      const subBtnGroup = document.getElementById("subcategory-buttons");
+      subBtnGroup.innerHTML = subcats.map(sub => 
+        `<button onclick="loadQuestion('${subject}', '${sub}')">${capitalize(sub)}</button>`
+      ).join('');
+      document.getElementById("question-container").innerHTML = ""; // Clear old question
+    }
+
+    function loadQuestion(subject, subcat) {
       const container = document.getElementById('question-container');
-      const q = questions[subject][0];
+      const q = questions[subject][subcat][0]; // First question for now
       container.innerHTML = `
         <div class="question-box">
           <p><strong>Question:</strong> ${q.question}</p>
@@ -139,6 +175,10 @@
         feedback.textContent = 'Incorrect. Try again.';
         feedback.style.color = 'red';
       }
+    }
+
+    function capitalize(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1);
     }
   </script>
 </body>
