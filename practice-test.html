@@ -11,9 +11,35 @@
       margin: 0;
       padding: 20px;
     }
+    header {
+      background-color: #003366;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      background-color: #0059b3;
+      padding: 10px;
+      text-align: center;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+    }
     h1 {
       text-align: center;
       color: #003366;
+    }
+    .button-group {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .button-group button {
+      margin: 0 10px;
+      padding: 10px 20px;
+      font-weight: bold;
+      cursor: pointer;
     }
     .question-box {
       background: white;
@@ -38,29 +64,75 @@
     <p>Your resource for A&P students</p>
   </header>
 
-<nav style="background-color: #0059b3; padding: 10px; text-align: center;">
-  <a href="index.html" style="color: white; margin: 0 15px; text-decoration: none;">Home</a>
-  <a href="pdf-library.html" style="color: white; margin: 0 15px; text-decoration: none;">AVIM Library</a>
-  <a href="practice-test.html" style="color: white; margin: 0 15px; text-decoration: none;">Practice Tests</a>
-  <a href="schematics.html" style="color: white; margin: 0 15px; text-decoration: none;">Schematics</a>
-  <a href="videos.html" style="color: white; margin: 0 15px; text-decoration: none;">Videos</a>
-</nav>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="pdf-library.html">AVIM Library</a>
+    <a href="practice-test.html">Practice Tests</a>
+    <a href="schematics.html">Schematics</a>
+    <a href="videos.html">Videos</a>
+  </nav>
+
   <h1>FAA Practice Test</h1>
-  <div class="question-box">
-    <p><strong>Question 1:</strong> What is the primary purpose of a magneto in an aircraft engine?</p>
-    <div class="options">
-      <label><input type="radio" name="q1" onclick="checkAnswer(this, 'incorrect')"> To power the aircraft's lights</label>
-      <label><input type="radio" name="q1" onclick="checkAnswer(this, 'incorrect')"> To provide cabin heat</label>
-      <label><input type="radio" name="q1" onclick="checkAnswer(this, 'correct')"> To generate ignition spark independently of the battery</label>
-      <label><input type="radio" name="q1" onclick="checkAnswer(this, 'incorrect')"> To reduce exhaust emissions</label>
-    </div>
-    <div class="feedback" id="feedback1"></div>
+
+  <div class="button-group">
+    <button onclick="loadSubject('airframe')">Airframe</button>
+    <button onclick="loadSubject('powerplant')">Powerplant</button>
+    <button onclick="loadSubject('general')">General</button>
   </div>
 
+  <div id="question-container"></div>
+
   <script>
-    function checkAnswer(input, result) {
-      const feedback = document.getElementById('feedback1');
-      if (result === 'correct') {
+    const questions = {
+      airframe: [
+        {
+          question: "What is the primary function of an aircraft's wing?",
+          options: ["To house the landing gear", "To provide lift", "To store cargo", "To protect engines"],
+          correct: 1
+        }
+      ],
+      powerplant: [
+        {
+          question: "What is the primary purpose of a magneto in an aircraft engine?",
+          options: [
+            "To power the aircraft's lights",
+            "To provide cabin heat",
+            "To generate ignition spark independently of the battery",
+            "To reduce exhaust emissions"
+          ],
+          correct: 2
+        }
+      ],
+      general: [
+        {
+          question: "What is the standard atmospheric pressure at sea level?",
+          options: ["14.7 psi", "12.0 psi", "29.92 psi", "9.6 psi"],
+          correct: 0
+        }
+      ]
+    };
+
+    function loadSubject(subject) {
+      const container = document.getElementById('question-container');
+      const q = questions[subject][0];
+      container.innerHTML = `
+        <div class="question-box">
+          <p><strong>Question:</strong> ${q.question}</p>
+          <div class="options">
+            ${q.options.map((opt, i) => `
+              <label>
+                <input type="radio" name="q" onclick="checkAnswer(${i}, ${q.correct})"> ${opt}
+              </label>
+            `).join('')}
+          </div>
+          <div class="feedback" id="feedback"></div>
+        </div>
+      `;
+    }
+
+    function checkAnswer(selected, correct) {
+      const feedback = document.getElementById('feedback');
+      if (selected === correct) {
         feedback.textContent = 'Correct!';
         feedback.style.color = 'green';
       } else {
