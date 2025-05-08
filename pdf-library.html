@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PDF Library</title>
+  <title>AVIM Library</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -11,31 +11,77 @@
       margin: 0;
       padding: 0;
     }
+
     header {
       background-color: #003366;
       color: white;
       padding: 20px;
       text-align: center;
     }
+
+    nav {
+      background-color: #0059b3;
+      padding: 10px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+    }
+
     .pdf-list {
       padding: 20px;
     }
+
     .pdf-item {
       background: white;
       margin-bottom: 15px;
       padding: 15px;
       border: 1px solid #ccc;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     }
+
+    .pdf-item p {
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
     .pdf-item a {
       color: #0059b3;
       text-decoration: none;
       font-weight: bold;
+      display: inline-block;
+      margin-bottom: 6px;
     }
-    iframe {
+
+    .pdf-item iframe.small-preview {
+      width: 100%;
+      height: 150px;
+      border: 1px solid #ddd;
+      margin-bottom: 8px;
+    }
+
+    .pdf-preview {
+      display: none;
+      margin-top: 10px;
+    }
+
+    .pdf-preview iframe {
       width: 100%;
       height: 500px;
       border: none;
-      margin-top: 10px;
+    }
+
+    .pdf-item button {
+      padding: 6px 12px;
+      background-color: #0059b3;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -43,47 +89,60 @@
   <header>
     <h1>AVIM Library</h1>
   </header>
-<nav style="background-color: #0059b3; padding: 10px; text-align: center;">
-  <a href="index.html" style="color: white; margin: 0 15px; text-decoration: none;">Home</a>
-  <a href="pdf-library.html" style="color: white; margin: 0 15px; text-decoration: none;">AVIM Library</a>
-  <a href="practice-test.html" style="color: white; margin: 0 15px; text-decoration: none;">Practice Tests</a>
-  <a href="schematics.html" style="color: white; margin: 0 15px; text-decoration: none;">Schematics</a>
-  <a href="videos.html" style="color: white; margin: 0 15px; text-decoration: none;">Videos</a>
-</nav>
-<div style="text-align: center; padding: 20px;">
-  <input type="text" id="pdfSearch" placeholder="Search PDFs..." oninput="filterPDFs()" style="padding: 10px; width: 80%; max-width: 400px; border-radius: 4px; border: 1px solid #ccc;">
-</div>
-<div id="pdf-list" class="pdf-list"></div>
 
-<script>
-const pdfFiles = [
-  { name: "FAA Airframe Handbook", url: "https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aircraft/airframe_handbook.pdf" },
-  { name: "FAA Powerplant Handbook", url: "https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aircraft/powerplant_handbook.pdf" },
-  { name: "Weight and Balance Handbook", url: "https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aviation/weight_balance_handbook.pdf" }
-];
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="pdf-library.html">AVIM Library</a>
+    <a href="practice-test.html">Practice Tests</a>
+    <a href="schematics.html">Schematics</a>
+    <a href="videos.html">Videos</a>
+  </nav>
 
-  const listContainer = document.getElementById("pdf-list");
+  <div style="text-align: center; padding: 20px;">
+    <input type="text" id="pdfSearch" placeholder="Search PDFs..." oninput="filterPDFs()" style="padding: 10px; width: 80%; max-width: 400px; border-radius: 4px; border: 1px solid #ccc;">
+  </div>
 
-  pdfFiles.forEach(file => {
-    const div = document.createElement("div");
-    div.className = "pdf-item";
-    div.innerHTML = `
-      <p>${file.name}</p>
-      <a href="${file.url}" target="_blank">Download PDF</a>
-      <iframe src="https://docs.google.com/gview?url=${file.url}&embedded=true"></iframe>
-    `;
-    listContainer.appendChild(div);
-  });
+  <div id="pdf-list" class="pdf-list"></div>
 
-  function filterPDFs() {
-    const input = document.getElementById('pdfSearch').value.toLowerCase();
-    const items = document.querySelectorAll('.pdf-item');
+  <script>
+    const pdfFiles = [
+      { name: "FAA Airframe Handbook", url: "https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aircraft/airframe_handbook.pdf" },
+      { name: "FAA Powerplant Handbook", url: "https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aircraft/powerplant_handbook.pdf" },
+      { name: "Weight and Balance Handbook", url: "https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aviation/weight_balance_handbook.pdf" }
+    ];
 
-    items.forEach(item => {
-      const text = item.textContent.toLowerCase();
-      item.style.display = text.includes(input) ? 'block' : 'none';
+    const listContainer = document.getElementById("pdf-list");
+
+    pdfFiles.forEach((file, index) => {
+      const previewId = `pdf-preview-${index}`;
+      const div = document.createElement("div");
+      div.className = "pdf-item";
+      div.innerHTML = `
+        <p>${file.name}</p>
+        <iframe class="small-preview" src="https://docs.google.com/gview?url=${file.url}&embedded=true"></iframe>
+        <a href="${file.url}" target="_blank">Download PDF</a><br>
+        <button onclick="togglePreview('${previewId}')">Show Full Preview</button>
+        <div class="pdf-preview" id="${previewId}">
+          <iframe src="https://docs.google.com/gview?url=${file.url}&embedded=true"></iframe>
+        </div>
+      `;
+      listContainer.appendChild(div);
     });
-  }
-</script>
+
+    function togglePreview(id) {
+      const el = document.getElementById(id);
+      el.style.display = el.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function filterPDFs() {
+      const input = document.getElementById('pdfSearch').value.toLowerCase();
+      const items = document.querySelectorAll('.pdf-item');
+
+      items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        item.style.display = text.includes(input) ? 'block' : 'none';
+      });
+    }
+  </script>
 </body>
 </html>
