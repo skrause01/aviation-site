@@ -78,11 +78,28 @@
         justify-content: center;
       }
     }
+    .form-section, .auth-section, .preview-section {
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+    form input, form textarea {
+      display: block;
+      width: 80%;
+      max-width: 400px;
+      margin: 0.5rem auto;
+      padding: 0.5rem;
+    }
+    .preview-section iframe {
+      width: 90%;
+      max-width: 560px;
+      height: 315px;
+      border: none;
+    }
   </style>
 </head>
 <body>
   <header>
-    <img src="Zero_to_Certified_Logo_Transparent.png" alt="Zero to Certified Logo" class="logo">
+    <img src="images/Zero_to_Certified_Logo_Transparent.png" alt="Zero to Certified Logo" class="logo">
     <p class="tagline">Built for learners. Backed by mechanics.</p>
   </header>
   <main class="main-content">
@@ -109,6 +126,31 @@
       <h3>Expert Instruction</h3>
       <p>Learn from experienced A&amp;P mechanics through engaging videos and exercises.</p>
     </div>
+  </section>
+  <section class="preview-section">
+    <h2>Course Preview</h2>
+    <p>Take a sneak peek at one of our modules below:</p>
+    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+  </section>
+  <section class="auth-section">
+    <h2>Login or Sign Up</h2>
+    <form>
+      <input type="email" placeholder="Email" required>
+      <input type="password" placeholder="Password" required>
+      <div class="buttons">
+        <a href="#" class="btn-primary">Login</a>
+        <a href="#" class="btn-secondary">Sign Up</a>
+      </div>
+    </form>
+  </section>
+  <section class="form-section">
+    <h2>Contact Us</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" rows="5" required></textarea>
+      <button class="btn-primary" type="submit">Send Message</button>
+    </form>
   </section>
 </body>
 </html>
