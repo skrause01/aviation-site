@@ -78,7 +78,7 @@
         justify-content: center;
       }
     }
-    .form-section, .auth-section, .preview-section {
+    .form-section, .auth-section, .preview-section, .courses {
       padding: 2rem 1rem;
       text-align: center;
     }
@@ -95,6 +95,18 @@
       height: 315px;
       border: none;
     }
+    .courses ul {
+      list-style: none;
+      padding: 0;
+    }
+    .courses li {
+      margin: 0.5rem 0;
+    }
+    .courses a {
+      text-decoration: none;
+      color: #e85c1f;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -106,18 +118,10 @@
     <h1>Start from scratch. Pass with confidence.</h1>
     <p>Comprehensive online courses to help you ace the A&amp;P exams and kick-start your aviation maintenance career.</p>
     <div class="buttons">
-<a href="https://zerotocertified.moodlecloud.com/login/index.php" class="btn-primary">Get Started</a>
+      <a href="https://zerotocertified.moodlecloud.com/login/index.php" class="btn-primary">Get Started</a>
       <a href="#" class="btn-secondary">Learn More</a>
     </div>
   </main>
-  <section class="courses">
-  <h2>Our Courses</h2>
-  <ul>
-    <li><a href="https://zerotocertified.moodlecloud.com/course/view.php?id=2">General A&P Prep</a></li>
-    <li><a href="https://zerotocertified.moodlecloud.com/course/view.php?id=3">Airframe Course</a></li>
-    <li><a href="https://zerotocertified.moodlecloud.com/course/view.php?id=4">Powerplant Course</a></li>
-  </ul>
-</section>
   <section class="features">
     <div class="feature">
       <img src="https://img.icons8.com/ios-filled/50/000000/open-book.png" alt="In-Depth Lessons">
@@ -135,6 +139,14 @@
       <p>Learn from experienced A&amp;P mechanics through engaging videos and exercises.</p>
     </div>
   </section>
+  <section class="courses">
+    <h2>Our Courses</h2>
+    <ul>
+      <li><a href="https://zerotocertified.moodlecloud.com/course/view.php?id=2">General A&amp;P Prep</a></li>
+      <li><a href="https://zerotocertified.moodlecloud.com/course/view.php?id=3">Airframe Course</a></li>
+      <li><a href="https://zerotocertified.moodlecloud.com/course/view.php?id=4">Powerplant Course</a></li>
+    </ul>
+  </section>
   <section class="preview-section">
     <h2>Course Preview</h2>
     <p>Take a sneak peek at one of our modules below:</p>
@@ -146,8 +158,8 @@
       <input type="email" placeholder="Email" required>
       <input type="password" placeholder="Password" required>
       <div class="buttons">
-        <a href="#" class="btn-primary">Login</a>
-        <a href="#" class="btn-secondary">Sign Up</a>
+        <a href="https://zerotocertified.moodlecloud.com/login/index.php" class="btn-primary">Login</a>
+        <a href="https://zerotocertified.moodlecloud.com/login/signup.php" class="btn-secondary">Sign Up</a>
       </div>
     </form>
   </section>
